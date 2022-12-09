@@ -1,0 +1,18 @@
+<h1>Rooms Component</h1>
+
+<p>To bind a property to the html template use the double curly braces</p>
+
+<p>{{ hotelName }}</p>
+
+<p>
+  To bind a property to an html attribute, for example, hidden attribute in a
+  div use the square bracket
+</p>
+
+<div [hidden]="hiddeRooms">
+  <span
+    >There are <b>{{ numberRooms }}</b> active</span
+  >
+</div>
+
+<button (click)="toggle()">Toggle</button>
