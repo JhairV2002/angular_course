@@ -1,0 +1,39 @@
+<h2>Directives</h2>
+
+<p [ngStyle]="{ color: rooms.avalibleRooms ? 'green' : 'red' }">
+  The directives are buit-in (or custom) functions can change the behavior or
+  the apparence of the DOM
+</p>
+
+<p><b>We got</b></p>
+
+<ul>
+  <li>*ngIf</li>
+  <li>*ngFor</li>
+  <li>*ngSwitch</li>
+  <li>ngClass</li>
+  <li>ngStyle</li>
+</ul>
+
+<div *ngIf="selectedRoom">
+  <span
+    ><b>{{ selectedRoom.price }}</b> is the price of the room</span
+  >
+</div>
+
+<div><button (click)="addRoom()">Add Room</button></div>
+<div><button (click)="changeTitle()">Change Title</button></div>
+<div><button (click)="editRoom()">Edit Room</button></div>
+<div><button (click)="deleteRoom()">Delete Room</button></div>
+<h1>{{ totalBytes }} loaded</h1>
+
+<button (click)="toggle()">Toggle Rooms List</button>
+<h2>{{ gerError$ | async }}</h2>
+<h2>number of rooms is: {{ roomsCount$ | async }}</h2>
+<div *ngIf="rooms$ | async as roomss">
+  <app-rooms-list
+    [rooms]="roomss"
+    [tableTitle]="title"
+    (roomSelected)="selectRoom($event)"
+  ></app-rooms-list>
+</div>
