@@ -10,7 +10,7 @@ import { DirectivesService } from './services/directives.service';
   styleUrls: ['./directives.component.css'],
 })
 export class DirectivesComponent implements OnInit, OnDestroy {
-  constructor(private directivesService: DirectivesService) {}
+  constructor(private directivesService: DirectivesService) { }
 
   subscription!: Subscription;
 
