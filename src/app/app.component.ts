@@ -10,6 +10,7 @@ import {
 import { InitService } from './init.service';
 // import { DirectivesComponent } from './directives/directives.component';
 import { LocalStorageToken } from './localstorage.token';
+import { ConfigService } from './services/config.service';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,8 @@ import { LocalStorageToken } from './localstorage.token';
 export class AppComponent implements OnInit {
   constructor(
     @Inject(LocalStorageToken) private localstorage: Storage,
-    private initService: InitService
+    private initService: InitService,
+    private configService: ConfigService
   ) {
     console.log(initService.config);
   }

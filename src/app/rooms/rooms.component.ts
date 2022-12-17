@@ -11,6 +11,7 @@ import {
 import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { DirectivesService } from '../directives/services/directives.service';
 import { HeaderComponent } from '../header/header.component';
+import { ConfigService } from '../services/config.service';
 import { Room, RoomList } from './rooms';
 
 @Component({
@@ -39,7 +40,10 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
   ngAfterViewChecked(): void { }
 
-  constructor(private directivesService: DirectivesService) { }
+  constructor(
+    private directivesService: DirectivesService,
+    private configService: ConfigService
+  ) { }
 
   subscription!: Subscription;
 
