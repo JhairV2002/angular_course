@@ -7,7 +7,6 @@ import { PipesComponent } from './pipes/pipes.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LifeCycleComponent } from './life-cycle/life-cycle.component';
 import { ContainerComponent } from './container/container.component';
-import { EmployeeComponent } from './employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
 import { RequestInterceptor } from './request.interceptor';
 import { InitService } from './init.service';
@@ -24,9 +23,9 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoveredDirective } from './hovered.directive';
 import { EmailValidatorDirective } from './emailvalidator/email-validator.directive';
-import { RoomsModule } from './rooms/rooms.module';
 import { DirectivesModule } from './directives/directives.module';
 import { HeaderModule } from './header/header.module';
+import { EmployeeModule } from './employee/employee.module';
 
 const initFactory = (initService: InitService) => {
   return () => initService.init();
@@ -38,7 +37,6 @@ const initFactory = (initService: InitService) => {
     PipesComponent,
     LifeCycleComponent,
     ContainerComponent,
-    EmployeeComponent,
     AppNavComponent,
     NotfoundComponent,
     LoginComponent,
@@ -47,7 +45,6 @@ const initFactory = (initService: InitService) => {
   ],
   imports: [
     BrowserModule,
-    RoomsModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
@@ -61,6 +58,7 @@ const initFactory = (initService: InitService) => {
     FormsModule,
     DirectivesModule,
     HeaderModule,
+    EmployeeModule,
   ],
   providers: [
     {
