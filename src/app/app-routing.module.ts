@@ -23,6 +23,13 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  //generated with ng g m booking  --route=booking --routing --module=app command
+  // --module=<module> where module is where we want to register the lazy loading
+  {
+    path: 'booking',
+    loadChildren: () =>
+      import('./booking/booking.module').then((m) => m.BookingModule),
+  },
   {
     path: '**',
     component: NotfoundComponent,
@@ -33,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
