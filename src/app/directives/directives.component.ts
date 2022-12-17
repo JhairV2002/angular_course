@@ -1,5 +1,5 @@
 import { HttpEventType } from '@angular/common/http';
-import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { Room, RoomList } from '../rooms/rooms';
 import { DirectivesService } from './services/directives.service';

@@ -3,13 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RoomsComponent } from './rooms/rooms.component';
-import { DirectivesComponent } from './directives/directives.component';
 import { PipesComponent } from './pipes/pipes.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LifeCycleComponent } from './life-cycle/life-cycle.component';
-import { RoomsListComponent } from './rooms-list/rooms-list.component';
-import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { APP_CONFIG, APP_SERVICE_CONFIG } from './AppConfig/appconfig.service';
@@ -24,12 +20,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { RoomsBookingComponent } from './rooms/rooms-booking/rooms-booking.component';
-import { RoomsAddComponent } from './rooms/rooms-add/rooms-add.component';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoveredDirective } from './hovered.directive';
 import { EmailValidatorDirective } from './emailvalidator/email-validator.directive';
+import { RoomsModule } from './rooms/rooms.module';
+import { DirectivesModule } from './directives/directives.module';
+import { HeaderModule } from './header/header.module';
 
 const initFactory = (initService: InitService) => {
   return () => initService.init();
@@ -38,24 +35,19 @@ const initFactory = (initService: InitService) => {
 @NgModule({
   declarations: [
     AppComponent,
-    RoomsComponent,
-    DirectivesComponent,
     PipesComponent,
     LifeCycleComponent,
-    RoomsListComponent,
-    HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
     AppNavComponent,
     NotfoundComponent,
-    RoomsBookingComponent,
-    RoomsAddComponent,
     LoginComponent,
     HoveredDirective,
     EmailValidatorDirective,
   ],
   imports: [
     BrowserModule,
+    RoomsModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
@@ -67,6 +59,8 @@ const initFactory = (initService: InitService) => {
     MatIconModule,
     MatListModule,
     FormsModule,
+    DirectivesModule,
+    HeaderModule,
   ],
   providers: [
     {
