@@ -18,7 +18,7 @@
   <span><b>{{ selectedRoom.price }}</b> is the price of the room</span>
 </div>
 
-<div><button (click)="addRoom()">Add Room</button></div>
+<div><button [routerLink]="'add'">Add Room</button></div>
 <div><button (click)="changeTitle()">Change Title</button></div>
 <div><button (click)="editRoom()">Edit Room</button></div>
 <div><button (click)="deleteRoom()">Delete Room</button></div>
@@ -30,3 +30,4 @@
 <div *ngIf="rooms$ | async as roomss">
   <app-rooms-list [rooms]="roomss" [tableTitle]="title" (roomSelected)="selectRoom($event)"></app-rooms-list>
 </div>
+<router-outlet></router-outlet>
