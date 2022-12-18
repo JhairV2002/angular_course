@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EmployeeComponent } from './employee/employee.component';
+import { LoginGuard } from './guards/login.guard';
 import { LoginComponent } from './login/login.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 // import { RoomsComponent } from './rooms/rooms.component';
@@ -12,11 +12,14 @@ const routes: Routes = [
     path: 'rooms',
     loadChildren: () =>
       import('./rooms/rooms.module').then((m) => m.RoomsModule),
+    canActivate: [LoginGuard],
+    canLoad: [LoginGuard],
   },
   {
     path: 'employee',
     loadChildren: () =>
       import('./employee/employee.module').then((m) => m.EmployeeModule),
+    canActivate: [LoginGuard],
   },
 
   {
@@ -29,6 +32,7 @@ const routes: Routes = [
     path: 'booking',
     loadChildren: () =>
       import('./booking/booking.module').then((m) => m.BookingModule),
+    canActivate: [LoginGuard],
   },
   {
     path: '**',
@@ -40,4 +44,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
