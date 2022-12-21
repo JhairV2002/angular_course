@@ -11,23 +11,19 @@
     Add Passport
   </button>
 </div>
+
+<div *ngIf="bookingForm.get('passport')">
+  <button mat-raised-button color="primary" type="button" (click)="removePassport()">
+    Delete Passport
+  </button>
+</div>
 <form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
-  <!-- <div> -->
-  <!--   <mat-form-field class="example-full-width"> -->
-  <!--     <mat-label>Email</mat-label> -->
-  <!--     <input type="text" matInput formControlName="roomId" placeholder="Ex. pat@example.com" /> -->
-  <!--     <!-- <mat-error *ngIf=" -->
-  <!--     <!--     emailFormControl.hasError('email') && -->
-  <!--     <!--     !emailFormControl.hasError('required') -->
-  <!--     <!--   "> -->
-  <!--     <!--   Please enter a valid email address -->
-  <!--     <!-- </mat-error> -->
-  <!--     <!-- <mat-error *ngIf="emailFormControl.hasError('required')"> -->
-  <!--     <!--   Email is <strong>required</strong> -->
-  <!--     <!-- </mat-error> -->
-  <!--   </mat-form-field> -->
-  <!-- </div> -->
   <div>
+    <!-- binding the add form controll -->
+    <mat-form-field class="example-full-width" *ngIf="bookingForm.get('passport')">
+      <mat-label>Passport</mat-label>
+      <input type="text" matInput formControlName="passport" placeholder="Passport Number" />
+    </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Room Id</mat-label>
       <input type="text" matInput formControlName="roomId" placeholder="Room Id" />
@@ -140,6 +136,11 @@
           <mat-label>Age</mat-label>
           <input type="number" matInput formControlName="age" placeholder="Guest Age" />
         </mat-form-field>
+        <div>
+          <button class="btn btn-primary" (click)="removeGuest(i)">
+            Delete Guest
+          </button>
+        </div>
       </div>
     </div>
   </div>
