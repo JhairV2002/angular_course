@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { ConfigService } from '../services/config.service';
 
 @Component({
@@ -11,6 +11,12 @@ export class BookingComponent implements OnInit {
   // class for the form goup
   bookingForm!: FormGroup;
   // service for build the form (add controls)
+
+  // accesing the form controls or groups
+
+  get guests() {
+    return this.bookingForm.get('guests') as FormArray;
+  }
 
   constructor(private configService: ConfigService, private fb: FormBuilder) { }
 
@@ -36,6 +42,7 @@ export class BookingComponent implements OnInit {
         country: [''],
         zipCode: [''],
       }),
+      guests: this.fb.array([this.fb.group({ guestName: [''], age: [''] })]),
     });
   }
   addBooking() {
@@ -44,6 +51,13 @@ export class BookingComponent implements OnInit {
     // gives the disabled state
     console.log(this.bookingForm.getRawValue());
   }
+  addGuest() {
+    this.guests.push(
+      this.fb.array([this.fb.group({ guestName: [''], age: [''] })])
+    );
+  }
+
+  addPassport() { }
 }
 
 export class Booking {

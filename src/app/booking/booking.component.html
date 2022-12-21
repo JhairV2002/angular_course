@@ -5,6 +5,12 @@
 
 <!-- bind the form to the reactive form in the ts file -->
 <!-- here can be only one form group for the entire form -->
+
+<div>
+  <button mat-raised-button color="primary" type="button" (click)="addPassport()">
+    Add Passport
+  </button>
+</div>
 <form [formGroup]="bookingForm" (ngSubmit)="addBooking()">
   <!-- <div> -->
   <!--   <mat-form-field class="example-full-width"> -->
@@ -70,7 +76,6 @@
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
   </div>
-  <!-- bind the nested form -->
   <div>
     <mat-form-field appearance="fill">
       <mat-label>Booking Date</mat-label>
@@ -80,6 +85,7 @@
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
   </div>
+  <!-- bind the nested form -->
   <div formGroupName="address">
     <mat-accordion class="example-headers-align" multi>
       <mat-expansion-panel>
@@ -121,6 +127,26 @@
         </mat-form-field>
       </mat-expansion-panel>
     </mat-accordion>
+  </div>
+  <div formArrayName="guests">
+    <div *ngFor="let guest of guests.controls; let i = index">
+      <div [formGroupName]="i">
+        <mat-form-field class="example-full-width">
+          <mat-label>Guest Name</mat-label>
+          <input type="text" matInput formControlName="guestName" placeholder="Guest Name" />
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <mat-label>Age</mat-label>
+          <input type="number" matInput formControlName="age" placeholder="Guest Age" />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" type="button" (click)="addGuest()">
+      Add Guest
+    </button>
   </div>
   <div>
     <button mat-raised-button color="primary">Book room</button>
