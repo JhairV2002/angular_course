@@ -44,14 +44,19 @@ export class BookingComponent implements OnInit {
       guestName: ['', [Validators.required, Validators.minLength(5)]],
       // nesting another form
       address: this.fb.group({
-        adressLine1: [''],
+        adressLine1: ['', { validators: [Validators.required] }],
         adressLine2: [''],
-        city: [''],
-        state: [''],
+        city: ['', { validators: [Validators.required] }],
+        state: ['', { validators: [Validators.required] }],
         country: [''],
         zipCode: [''],
       }),
-      guests: this.fb.array([this.fb.group({ guestName: [''], age: [''] })]),
+      guests: this.fb.array([
+        this.fb.group({
+          guestName: ['', { validators: Validators.required }],
+          age: [''],
+        }),
+      ]),
       tnc: new FormControl(false, { validators: [Validators.requiredTrue] }),
     });
   }
@@ -60,6 +65,30 @@ export class BookingComponent implements OnInit {
     // console.log(this.bookingForm.value);
     // gives the disabled state
     console.log(this.bookingForm.getRawValue());
+    this.bookingForm.reset({
+      // add a default value and disable it
+      roomId: '2',
+      // [''] shortcut to new FormControl
+      guestEmail: '',
+      checkinDate: '',
+      checkoutDate: '',
+      bookingStatus: '',
+      bookingAmount: '',
+      bookingDate: '',
+      mobilenumber: '',
+      guestName: '',
+      // nesting another form
+      address: {
+        adressLine1: '',
+        adressLine2: '',
+        city: '',
+        state: '',
+        country: '',
+        zipCode: '',
+      },
+      guests: [],
+      tnc: false,
+    });
   }
   addGuest() {
     this.guests.push(
