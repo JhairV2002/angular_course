@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  FormControl,
+  FormArray,
+  Validators,
+} from '@angular/forms';
 import { ConfigService } from '../services/config.service';
 
 @Component({
@@ -23,16 +29,19 @@ export class BookingComponent implements OnInit {
   ngOnInit(): void {
     this.bookingForm = this.fb.group({
       // add a default value and disable it
-      roomId: new FormControl({ value: 2, disabled: true }),
+      roomId: new FormControl(
+        { value: 2, disabled: true },
+        { validators: [Validators.required] }
+      ),
       // [''] shortcut to new FormControl
-      guestEmail: [''],
+      guestEmail: ['', [Validators.required, Validators.email]],
       checkinDate: [''],
       checkoutDate: [''],
       bookingStatus: [''],
       bookingAmount: [''],
       bookingDate: [''],
       mobilenumber: [''],
-      guestName: [''],
+      guestName: ['', [Validators.required, Validators.minLength(5)]],
       // nesting another form
       address: this.fb.group({
         adressLine1: [''],
@@ -43,6 +52,7 @@ export class BookingComponent implements OnInit {
         zipCode: [''],
       }),
       guests: this.fb.array([this.fb.group({ guestName: [''], age: [''] })]),
+      tnc: new FormControl(false, { validators: [Validators.requiredTrue] }),
     });
   }
   addBooking() {

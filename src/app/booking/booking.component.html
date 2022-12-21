@@ -150,6 +150,13 @@
     </button>
   </div>
   <div>
-    <button mat-raised-button color="primary">Book room</button>
+    <section class="example-section">
+      <mat-checkbox class="example-margin" formControlName="tnc">Tnc Conditions</mat-checkbox>
+    </section>
+  </div>
+  <div>
+    <button [disabled]="bookingForm.invalid" mat-raised-button color="primary">
+      Book room
+    </button>
   </div>
 </form>
