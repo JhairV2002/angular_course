@@ -25,7 +25,6 @@ export class BookingComponent implements OnInit {
   }
 
   constructor(private configService: ConfigService, private fb: FormBuilder) { }
-
   ngOnInit(): void {
     this.bookingForm = this.fb.group({
       // add a default value and disable it
@@ -58,6 +57,40 @@ export class BookingComponent implements OnInit {
         }),
       ]),
       tnc: new FormControl(false, { validators: [Validators.requiredTrue] }),
+    });
+
+    this.getBookingData();
+  }
+
+  // api simulation
+  //
+  // key: form control
+  // value: form value
+
+  getBookingData() {
+    // need to pass every value for each control
+    this.bookingForm.patchValue({
+      roomId: '4',
+      // [''] shortcut to new FormControl
+      guestEmail: 'jag@gmail.com',
+      checkinDate: '12/01/2022',
+      checkoutDate: '13/01/2022',
+      bookingStatus: 'test',
+      bookingAmount: '200',
+      bookingDate: '13/01/2022',
+      mobilenumber: '',
+      guestName: '',
+      // nesting another form
+      address: {
+        adressLine1: '',
+        adressLine2: '',
+        city: '',
+        state: '',
+        country: '',
+        zipCode: '',
+      },
+      guests: [],
+      tnc: false,
     });
   }
   addBooking() {
