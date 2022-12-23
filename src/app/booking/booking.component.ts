@@ -6,7 +6,9 @@ import {
   FormArray,
   Validators,
 } from '@angular/forms';
+import { exhaustMap, mergeMap, switchMap } from 'rxjs';
 import { ConfigService } from '../services/config.service';
+import { BookingService } from './booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -24,7 +26,12 @@ export class BookingComponent implements OnInit {
     return this.bookingForm.get('guests') as FormArray;
   }
 
-  constructor(private configService: ConfigService, private fb: FormBuilder) { }
+  constructor(
+    private bookingService: BookingService,
+    private configService: ConfigService,
+    private fb: FormBuilder
+  ) { }
+
   ngOnInit(): void {
     this.bookingForm = this.fb.group({
       // add a default value and disable it
@@ -33,7 +40,13 @@ export class BookingComponent implements OnInit {
         { validators: [Validators.required] }
       ),
       // [''] shortcut to new FormControl
-      guestEmail: ['', [Validators.required, Validators.email]],
+      guestEmail: [
+        '',
+        {
+          validators: [Validators.required, Validators.email],
+          updateOn: 'blur', // change(default), submit
+        },
+      ],
       checkinDate: [''],
       checkoutDate: [''],
       bookingStatus: [''],
@@ -60,6 +73,12 @@ export class BookingComponent implements OnInit {
     });
 
     this.getBookingData();
+    //default behavior: trigger on every key press
+    // this.bookingForm.valueChanges.subscribe((data) => this.bookingService.bookRoom(data));
+    this.bookingForm.valueChanges
+      // map operators
+      // .pipe(exhaustMap((data) => this.bookingService.bookRoom(data)))
+      .subscribe((data) => console.log(data));
   }
 
   // api simulation
@@ -98,30 +117,35 @@ export class BookingComponent implements OnInit {
     // console.log(this.bookingForm.value);
     // gives the disabled state
     console.log(this.bookingForm.getRawValue());
-    this.bookingForm.reset({
-      // add a default value and disable it
-      roomId: '2',
-      // [''] shortcut to new FormControl
-      guestEmail: '',
-      checkinDate: '',
-      checkoutDate: '',
-      bookingStatus: '',
-      bookingAmount: '',
-      bookingDate: '',
-      mobilenumber: '',
-      guestName: '',
-      // nesting another form
-      address: {
-        adressLine1: '',
-        adressLine2: '',
-        city: '',
-        state: '',
-        country: '',
-        zipCode: '',
-      },
-      guests: [],
-      tnc: false,
-    });
+    this.bookingService
+      .bookRoom(this.bookingForm.getRawValue())
+      .subscribe((data) => {
+        console.log(data);
+      });
+    // this.bookingForm.reset({
+    //   // add a default value and disable it
+    //   roomId: '2',
+    //   // [''] shortcut to new FormControl
+    //   guestEmail: '',
+    //   checkinDate: '',
+    //   checkoutDate: '',
+    //   bookingStatus: '',
+    //   bookingAmount: '',
+    //   bookingDate: '',
+    //   mobilenumber: '',
+    //   guestName: '',
+    //   // nesting another form
+    //   address: {
+    //     adressLine1: '',
+    //     adressLine2: '',
+    //     city: '',
+    //     state: '',
+    //     country: '',
+    //     zipCode: '',
+    //   },
+    //   guests: [],
+    //   tnc: false,
+    // });
   }
   addGuest() {
     this.guests.push(
