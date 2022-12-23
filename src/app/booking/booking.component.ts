@@ -9,6 +9,7 @@ import {
 import { exhaustMap, mergeMap, switchMap } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 import { BookingService } from './booking.service';
+import { CustomValidator } from './validators/CustomValidator';
 
 @Component({
   selector: 'app-booking',
@@ -53,7 +54,15 @@ export class BookingComponent implements OnInit {
       bookingAmount: [''],
       bookingDate: [''],
       mobilenumber: [''],
-      guestName: ['', [Validators.required, Validators.minLength(5)]],
+      guestName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(5),
+          CustomValidator.ValidateName,
+          CustomValidator.ValidateSpecialChar('*'),
+        ],
+      ],
       // nesting another form
       address: this.fb.group({
         adressLine1: ['', { validators: [Validators.required] }],
@@ -69,7 +78,10 @@ export class BookingComponent implements OnInit {
           age: [''],
         }),
       ]),
-      tnc: new FormControl(false, { validators: [Validators.requiredTrue] }),
+      tnc: new FormControl(false, {
+        validators: [Validators.requiredTrue, CustomValidator.ValidateDate],
+        updateOn: 'blur',
+      }),
     });
 
     this.getBookingData();
