@@ -6,6 +6,7 @@ import {
   FormArray,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { exhaustMap, mergeMap, switchMap } from 'rxjs';
 import { ConfigService } from '../services/config.service';
 import { BookingService } from './booking.service';
@@ -30,14 +31,16 @@ export class BookingComponent implements OnInit {
   constructor(
     private bookingService: BookingService,
     private configService: ConfigService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    const roomId = this.route.snapshot.paramMap.get('roomId');
     this.bookingForm = this.fb.group({
       // add a default value and disable it
       roomId: new FormControl(
-        { value: 2, disabled: true },
+        { value: roomId, disabled: true },
         { validators: [Validators.required] }
       ),
       // [''] shortcut to new FormControl
@@ -101,7 +104,6 @@ export class BookingComponent implements OnInit {
   getBookingData() {
     // need to pass every value for each control
     this.bookingForm.patchValue({
-      roomId: '4',
       // [''] shortcut to new FormControl
       guestEmail: 'jag@gmail.com',
       checkinDate: '12/01/2022',

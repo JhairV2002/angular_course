@@ -29,7 +29,7 @@ const routes: Routes = [
   //generated with ng g m booking  --route=booking --routing --module=app command
   // --module=<module> where module is where we want to register the lazy loading
   {
-    path: 'booking',
+    path: 'booking/:roomId',
     loadChildren: () =>
       import('./booking/booking.module').then((m) => m.BookingModule),
     // canActivate: [LoginGuard],

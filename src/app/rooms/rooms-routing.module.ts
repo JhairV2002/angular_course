@@ -15,10 +15,10 @@ const routes: Routes = [
         path: 'add',
         component: RoomsAddComponent,
       },
-      {
-        path: ':id',
-        component: RoomsBookingComponent,
-      },
+      // {
+      //   path: ':id',
+      //   component: RoomsBookingComponent,
+      // },
     ],
   },
 ];

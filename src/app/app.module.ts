@@ -27,6 +27,7 @@ import { DirectivesModule } from './directives/directives.module';
 import { HeaderModule } from './header/header.module';
 import { EmployeeModule } from './employee/employee.module';
 import { RouteConfigToken } from './services/routeConfig.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const initFactory = (initService: InitService) => {
   return () => initService.init();
@@ -60,6 +61,7 @@ const initFactory = (initService: InitService) => {
     DirectivesModule,
     HeaderModule,
     EmployeeModule,
+    MatSnackBarModule,
   ],
   providers: [
     {
