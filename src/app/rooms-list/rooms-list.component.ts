@@ -14,11 +14,12 @@ import { RoomList } from '../rooms/rooms';
   selector: 'app-rooms-list',
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoomsListComponent implements OnChanges, OnDestroy {
   @Input() rooms: RoomList[] | null = [];
   @Input() tableTitle: string = '';
+  @Input() price = 0;
   // output is an event
   @Output() roomSelected = new EventEmitter<RoomList>();
 

@@ -10,7 +10,7 @@
       <th>Checkout Time</th>
       <th>Select Room</th>
     </tr>
-    <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms; let e = even; let o = odd">
+    <tr [ngClass]="e ? 'even' : 'odd'" *ngFor="let room of rooms! | filter : price; let e = even; let o = odd">
       <td>
         {{ e ? "Even" : "Odd" }}
       </td>

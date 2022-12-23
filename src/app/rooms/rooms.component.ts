@@ -8,6 +8,7 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { catchError, map, Observable, of, Subject, Subscription } from 'rxjs';
 import { DirectivesService } from '../directives/services/directives.service';
 import { HeaderComponent } from '../header/header.component';
@@ -62,6 +63,8 @@ export class RoomsComponent implements OnInit, AfterViewInit, AfterViewChecked {
       return of([]);
     })
   );
+
+  priceFilter = new FormControl(0);
 
   roomsCount$ = this.directivesService.getRooms$.pipe(
     map((rooms) => rooms.length)

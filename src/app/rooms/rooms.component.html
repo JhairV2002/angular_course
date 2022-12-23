@@ -27,7 +27,13 @@
 <button (click)="toggle()">Toggle Rooms List</button>
 <h2>{{ gerError$ | async }}</h2>
 <h2>number of rooms is: {{ roomsCount$ | async }}</h2>
+
+{{ priceFilter | json }}
+<div>
+  <input type="number" class="form-control" placeholder="Price" [formControl]="priceFilter" />
+</div>
 <div *ngIf="rooms$ | async as roomss">
-  <app-rooms-list [rooms]="roomss" [tableTitle]="title" (roomSelected)="selectRoom($event)"></app-rooms-list>
+  <app-rooms-list [rooms]="roomss" [price]="priceFilter.value!" [tableTitle]="title"
+    (roomSelected)="selectRoom($event)"></app-rooms-list>
 </div>
 <router-outlet></router-outlet>
